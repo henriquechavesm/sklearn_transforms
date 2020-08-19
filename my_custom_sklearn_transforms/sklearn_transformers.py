@@ -24,5 +24,7 @@ class RoundValues(BaseEstimator, TransformerMixin):
     
     def transform(self, X):
         data = X.copy()
-        data[self.columns] = data[self.columns].apply(np.round, axis=0)
+        columns_to_round = X[self.columns].copy()
+        data[self.columns] = columns_to_round.applymap(lambda x: np.round(x))
+        # data[self.columns] = data[self.columns].apply(np.round, axis=0)
         return data
